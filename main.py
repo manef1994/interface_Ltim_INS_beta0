@@ -206,6 +206,7 @@ def r_algorithm(signal, fs):
         r_peaks = nk.ecg_peaks(signal, sampling_rate=fs, method="rodrigues2021")
         print("peaks length before return\t", len(r_peaks))
 
+
     xx = r_peaks[1]
     r_peaks = xx["ECG_R_Peaks"]
     print("first peak\t", r_peaks[0])
