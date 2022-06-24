@@ -206,28 +206,13 @@ def r_algorithm(signal, fs):
         r_peaks = nk.ecg_peaks(signal, sampling_rate=fs, method="rodrigues2021")
         print("peaks length before return\t", len(r_peaks))
 
-
     xx = r_peaks[1]
     r_peaks = xx["ECG_R_Peaks"]
-    print("first peak\t", r_peaks[0])
-    print("final peak\t", r_peaks[-1])
 
-    # pl = [0] * len(r_peaks)
-    #
-    # fig, axs = plt.subplots()
-    # axs.plot(signal_input)
-    # axs.plot(r_peaks, pl, 'ro')
-    # axs.set_xlabel('Time')
-    # axs.set_ylabel('Amplitude')
-    # axs.grid(True)
-    # plt.show()
-    #
-    # print("peaks length before return2\t", len(r_peaks))
     return r_peaks
 
 def Action(path):
     global fs, seizures_start_f, final_peaks, signal_input
-    #plt.close('all')
     first_filter = comboExample.get()
     seconde_filter = filter_two.get()
     third_filter = filter_three.get()
@@ -340,8 +325,6 @@ def Action(path):
         first_line = LineString(np.column_stack((tt_healthy, STD_app)))
         second_line = LineString(np.column_stack((tt_healthy, arr)))
         intersection = first_line.intersection(second_line)
-        # x, y = LineString(intersection).xy
-        # print(" x \t", x)
 
         arr_n = []
         arr1_n = []
@@ -353,11 +336,7 @@ def Action(path):
         first_line_n = LineString(np.column_stack((tt_healthy, STD_NN50)))
         second_line_n = LineString(np.column_stack((tt_healthy, arr_n)))
         intersection_n = first_line_n.intersection(second_line_n)
-        # x_n, y_n = LineString(intersection_n).xy
-        # print((x_n))
 
-        round_app = []
-        round_NN50 = []
 
         # =============================================================================================================
         # == plotting the results
@@ -531,8 +510,6 @@ def features_EX(singal_ouput, fs):
 
 signal_input = []
 start_time = time.time()
-heart_rate_bmp = []
-HRV, mean_hr, max_hr, min_hr, average_diff = ([] for i in range(5))
 features_num = 0
 feature_nn50 = 0
 sdd = 0
@@ -690,13 +667,7 @@ sei.grid(row=row, column=0)
 thresh_ApEn = Entry(window, width="35")
 thresh_ApEn.grid(row=row, column=1)
 thresh_ApEn.insert(END, '0')
-# row += 1
 
-# # = NN50 threshold value
-# space = Label(window, text="      ")
-# space.grid(row=row, column=0)
-# row += 3
-#
 space = Label(window, text="      ")
 space1 = Label(window, text="      ")
 space.grid(row=row, column=0)
@@ -708,13 +679,6 @@ thresh_NN50 = Entry(window, width="35")
 thresh_NN50.grid(row=row, column=1)
 thresh_NN50.insert(END, '0')
 row += 1
-
-
-
-# ======= start the work
-# space = Label(window, text="      ")
-# space.grid(row=row, column=0)
-# row += 1
 
 button_action = Button(text="Apply", fg="red", height=3, width=60, command=lambda: Action(path=path_signal))
 button_action.grid(row=row, column=1)
