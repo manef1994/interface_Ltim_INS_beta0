@@ -127,6 +127,9 @@ def Read_signal(path):
     global fs
     signal_input = []
 
+    elect = str(electrode.get())
+
+
     if path.endswith('.csv'):
         sText.insert(END, 'reading the signal... \n')
         time.sleep(1)
@@ -137,7 +140,7 @@ def Read_signal(path):
 
         edf = read_raw_edf(path, preload=False, stim_channel=None, verbose=False)
         xx = edf.ch_names
-        index = xx.index("2")
+        index = xx.index(elect)
         fs = edf.info['sfreq']
         fs = int(fs)
         signal_input = edf[index]
@@ -561,6 +564,14 @@ l2.grid(row=row, column=0)
 e1 = Entry(window, width="15")
 e1.grid(row=row, column=1)
 e1.insert(END, '0')
+row += 1
+
+# select the exact ECG electrode to use
+fil1 = Label(window, text="Tap the name of the electrode")
+fil1.grid(row=row, column=0)
+electrode = Entry(window, width="15")
+electrode.grid(row=row, column=1)
+electrode.insert(END, '2')
 row += 1
 
 space = Label(window, text="      ")
